@@ -1,0 +1,15 @@
+.button {
+  background-color: transparent;
+  border: 1px solid lightblue;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: rgb(212, 224, 229);
+}
+.button:active {
+  background-color: rgb(173, 216, 230);
+}
