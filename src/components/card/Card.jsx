@@ -1,5 +1,6 @@
 import "./Card.css";
 import CardImage from "./CardImage.jsx";
+import UiOverlay from "./UiOverlay.jsx";
 
 function Card({ card, onImageChange }) {
   return (
@@ -10,6 +11,8 @@ function Card({ card, onImageChange }) {
         <input className="card__text-row" defaultValue="Text Top-Right" />
       </div>
       <CardImage image={card?.image} onImageChange={onImageChange} />
+      <UiOverlay />
+
       <div className="card__title">Card Title</div>
       <div className="card__description">Card Description</div>
     </div>
