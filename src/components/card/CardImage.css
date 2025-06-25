@@ -14,3 +14,12 @@
   cursor: pointer;
   height: 100%;
 }
+
+.card__image {
+  background: #f0f0f0;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 4px;
+
+  overflow: hidden;
+}

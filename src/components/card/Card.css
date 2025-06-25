@@ -11,7 +11,7 @@
   overflow: hidden;
 
   aspect-ratio: 3 / 4;
-  min-height: 400px;
+  height: 400px;
 
   padding: 0.5rem;
 
@@ -21,11 +21,6 @@
     justify-content: space-between;
 
     line-height: 1;
-  }
-
-  & .card__image {
-    background: #f0f0f0;
-    aspect-ratio: 3 / 2;
   }
 
   & .card__title {
