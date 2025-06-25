@@ -8,7 +8,7 @@ function App() {
     <>
       <Menu />
       <Workspace>
-        <Card />
+        <Card /> {/* To be replaced with dynamic content later */}
       </Workspace>
     </>
   );
