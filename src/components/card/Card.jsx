@@ -2,7 +2,15 @@ import "./Card.css";
 import CardImage from "./CardImage.jsx";
 import UiOverlay from "./UiOverlay.jsx";
 
-function Card({ card, onImageChange }) {
+function Card({ card, updateCard }) {
+  function handleImageChange(image) {
+    if (card) {
+      console.log("Image changed:", image);
+      console.log("card:", card);
+      updateCard(card.id, { image: URL.createObjectURL(image) });
+    }
+  }
+
   return (
     <div className="card">
       <div className="card__bg"></div>
@@ -10,7 +18,7 @@ function Card({ card, onImageChange }) {
         <input className="card__text-row" defaultValue="Text Top-Left" />
         <input className="card__text-row" defaultValue="Text Top-Right" />
       </div>
-      <CardImage image={card?.image} onImageChange={onImageChange} />
+      <CardImage image={card?.image} onImageChange={handleImageChange} />
       <UiOverlay />
 
       <div className="card__title">Card Title</div>

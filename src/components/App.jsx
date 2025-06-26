@@ -23,22 +23,10 @@ function App() {
     setCurrentCard(testCard);
   }
 
-  // const addCard = (card) => {
-  //   setCards([...cards, card]);
-  //   setCurrentCard(card);
-  // };
-
-  // const removeCard = (card) => {
-  //   setCards(cards.filter((c) => c !== card));
-  //   setCurrentCard(null);
-  // };
-
-  function onCardImageChange(image) {
-    if (currentCard) {
-      const updatedCard = { ...currentCard, image: URL.createObjectURL(image) };
-      setCurrentCard(updatedCard);
-      setCards(cards.map((c) => (c.id === currentCard.id ? updatedCard : c)));
-    }
+  function updateCard(id, changes) {
+    setCards((prev) =>
+      prev.map((card) => (card.id === id ? { ...card, ...changes } : card))
+    );
   }
 
   return (
@@ -46,7 +34,7 @@ function App() {
       <Menu />
       <Workspace>
         {currentCard ? (
-          <Card card={currentCard} onImageChange={onCardImageChange} />
+          <Card card={currentCard} updateCard={updateCard} />
         ) : (
           <Card />
         )}
