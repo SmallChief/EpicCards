@@ -1,27 +1,41 @@
 import "./CardImage.css";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-function CardImage({ image, onImageChange }) {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+function CardImage({
+  image,
+  position,
+  onImageChange,
+  onImageMove,
+  onImageRect,
+}) {
   const [dragging, setDragging] = useState(false);
   const dragStart = useRef({ x: 0, y: 0 });
+  const imageStart = useRef({ x: 0, y: 0 });
+  const imgRef = useRef(null);
 
   const handleMouseDown = (e) => {
     setDragging(true);
     dragStart.current = { x: e.clientX, y: e.clientY };
+    imageStart.current = { x: position.x, y: position.y };
   };
 
-  const handleMouseMove = (e) => {
-    if (dragging) {
-      const dx = e.clientX - dragStart.current.x;
-      const dy = e.clientY - dragStart.current.y;
-      setPosition({ x: position.x + dx, y: position.y + dy });
-    }
-  };
+  const handleMouseMove = useCallback(
+    (e) => {
+      if (dragging) {
+        const dx = e.clientX - dragStart.current.x;
+        const dy = e.clientY - dragStart.current.y;
+        onImageMove({
+          x: imageStart.current.x + dx,
+          y: imageStart.current.y + dy,
+        });
+      }
+    },
+    [dragging, onImageMove]
+  );
 
-  const handleMouseUp = () => {
+  const handleMouseUp = useCallback(() => {
     setDragging(false);
-  };
+  }, []);
 
   useEffect(() => {
     if (dragging) {
@@ -36,7 +50,20 @@ function CardImage({ image, onImageChange }) {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [dragging]);
+  }, [dragging, handleMouseMove, handleMouseUp]);
+
+  // Report image rect to parent
+  useEffect(() => {
+    if (image && imgRef.current && onImageRect) {
+      const rect = imgRef.current.getBoundingClientRect();
+      onImageRect({
+        width: rect.width,
+        height: rect.height,
+        left: rect.left,
+        top: rect.top,
+      });
+    }
+  }, [image, position, onImageRect]);
 
   if (!image) {
     return (
@@ -56,8 +83,9 @@ function CardImage({ image, onImageChange }) {
     return (
       <div className="card__image">
         <img
+          ref={imgRef}
           src={image}
-          style={{ left: position.x, top: position.y }}
+          style={{ left: position.x, top: position.y, position: "absolute" }}
           onMouseDown={handleMouseDown}
           alt="Card"
           className="card__image-content"
