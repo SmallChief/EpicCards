@@ -1,7 +1,19 @@
 import "./UiOverlay.css";
 
-function UiOverlay() {
-  return <div className="ui-overlay"></div>;
+function UiOverlay({ imageRect }) {
+  if (!imageRect) return null;
+  return (
+    <div
+      id="ui-overlay"
+      style={{
+        position: "fixed",
+        left: imageRect.left,
+        top: imageRect.top,
+        width: imageRect.width,
+        height: imageRect.height,
+      }}
+    ></div>
+  );
 }
 
 export default UiOverlay;
