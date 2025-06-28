@@ -15,6 +15,7 @@ function App() {
     description: "This is a test card for demonstration purposes.",
     header: ["Test Header", "Another Header"],
     image: null, // Initially no image
+    position: { x: 0, y: 0 }, // Initial position
   };
 
   // Adding a test card for demonstration
@@ -24,9 +25,17 @@ function App() {
   }
 
   function updateCard(id, changes) {
-    setCards((prev) =>
-      prev.map((card) => (card.id === id ? { ...card, ...changes } : card))
+    setCurrentCard((prevCard) => {
+      if (prevCard && prevCard.id === id) {
+        return { ...prevCard, ...changes };
+      }
+      return prevCard;
+    });
+    setCards((prevCards) =>
+      prevCards.map((card) => (card.id === id ? { ...card, ...changes } : card))
     );
+
+    console.log("Card updated:", id, changes);
   }
 
   return (
