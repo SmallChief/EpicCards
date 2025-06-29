@@ -5,6 +5,17 @@ import { useState, useCallback } from "react";
 
 function Card({ card, updateCard }) {
   const [imageRect, setImageRect] = useState(null);
+  const [imageFocused, setImageFocused] = useState(false);
+
+  // Handle image focus state on click
+  function handleImageFocus() {
+    setImageFocused(true);
+  }
+
+  // Handle image blur state on click outside
+  function handleImageBlur() {
+    setImageFocused(false);
+  }
 
   function handleImageChange(image) {
     if (card) {
@@ -36,11 +47,15 @@ function Card({ card, updateCard }) {
         onImageChange={handleImageChange}
         onImageMove={handleImageMove}
         onImageRect={handleImageRect}
+        onImageFocus={handleImageFocus}
+        onImageBlur={handleImageBlur}
       />
-      <UiOverlay
-        position={card?.position || { x: 0, y: 0 }}
-        imageRect={imageRect}
-      />
+      {imageFocused && (
+        <UiOverlay
+          position={card?.position || { x: 0, y: 0 }}
+          imageRect={imageRect}
+        />
+      )}
 
       <div className="card__title">Card Title</div>
       <div className="card__description">Card Description</div>

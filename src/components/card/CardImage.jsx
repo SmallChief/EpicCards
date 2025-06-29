@@ -7,6 +7,8 @@ function CardImage({
   onImageChange,
   onImageMove,
   onImageRect,
+  onImageFocus,
+  onImageBlur,
 }) {
   const [dragging, setDragging] = useState(false);
   const dragStart = useRef({ x: 0, y: 0 });
@@ -65,6 +67,14 @@ function CardImage({
     }
   }, [image, position, onImageRect]);
 
+  // Handle image focus and blur on clicking the image
+  const handleFocus = () => {
+    if (onImageFocus) onImageFocus();
+  };
+  const handleBlur = () => {
+    if (onImageBlur) onImageBlur();
+  };
+
   if (!image) {
     return (
       <div className="card__image">
@@ -90,6 +100,9 @@ function CardImage({
           alt="Card"
           className="card__image-content"
           draggable="false"
+          tabIndex={0}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
         />
       </div>
     );
