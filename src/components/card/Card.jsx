@@ -1,6 +1,6 @@
 import "./Card.css";
 import CardImage from "./CardImage.jsx";
-import UiOverlay from "./UiOverlay.jsx";
+import UiOverlay from "./UiOverlay/UiOverlay.jsx";
 import { useState, useCallback } from "react";
 
 function Card({ card, updateCard }) {
