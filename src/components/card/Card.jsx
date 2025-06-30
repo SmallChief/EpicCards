@@ -4,7 +4,6 @@ import UiOverlay from "./UiOverlay/UiOverlay.jsx";
 import { useState, useCallback } from "react";
 
 function Card({ card, updateCard }) {
-  const [imageRect, setImageRect] = useState(null);
   const [imageFocused, setImageFocused] = useState(false);
 
   // Handle image focus state on click
@@ -44,7 +43,6 @@ function Card({ card, updateCard }) {
           imageRect: newRect,
           imageAspectRatio: meta.aspectRatio || 1, // Default aspect ratio if not available
         });
-        setImageRect(newRect); // Ensure local state is updated for immediate render
       });
     }
   }
@@ -58,11 +56,6 @@ function Card({ card, updateCard }) {
     [card, updateCard]
   );
 
-  // Callback to receive image rect from CardImage
-  const handleImageRect = useCallback((rect) => {
-    setImageRect(rect);
-  }, []);
-
   return (
     <div className="card">
       <div className="card__bg"></div>
@@ -73,17 +66,15 @@ function Card({ card, updateCard }) {
       <CardImage
         image={card?.image}
         position={card?.position || { x: 0, y: 0 }}
-        imageRect={card?.imageRect || imageRect} // Pass imageRect to CardImage
+        imageRect={card?.imageRect}
         onImageChange={handleImageChange}
         onImageMove={handleImageRectChange}
-        onImageRect={handleImageRect}
         onImageFocus={handleImageFocus}
         onImageBlur={handleImageBlur}
       />
       {imageFocused && (
         <UiOverlay
-          position={card?.position || { x: 0, y: 0 }}
-          imageRect={imageRect}
+          imageRect={card?.imageRect}
           onImageRectChange={handleImageRectChange}
         />
       )}
