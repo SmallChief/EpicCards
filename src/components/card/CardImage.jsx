@@ -9,6 +9,7 @@ function CardImage({
   onImageMove,
   onImageFocus,
   onImageBlur,
+  containerRef,
 }) {
   const [dragging, setDragging] = useState(false);
   const dragStart = useRef({ x: 0, y: 0 });
@@ -70,7 +71,7 @@ function CardImage({
 
   if (!image) {
     return (
-      <div className="card__image">
+      <div className="card__image" ref={containerRef}>
         <input
           type="file"
           name="image-input"
@@ -84,7 +85,7 @@ function CardImage({
     );
   } else {
     return (
-      <div className="card__image">
+      <div className="card__image" ref={containerRef}>
         <img
           ref={imgRef}
           src={image}

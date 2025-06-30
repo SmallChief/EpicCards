@@ -1,10 +1,11 @@
 import "./Card.css";
 import CardImage from "./CardImage.jsx";
 import UiOverlay from "./UiOverlay/UiOverlay.jsx";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 
 function Card({ card, updateCard }) {
   const [imageFocused, setImageFocused] = useState(false);
+  const imageContainerRef = useRef(null);
 
   // Handle image focus state on click
   function handleImageFocus() {
@@ -71,9 +72,11 @@ function Card({ card, updateCard }) {
         onImageMove={handleImageRectChange}
         onImageFocus={handleImageFocus}
         onImageBlur={handleImageBlur}
+        containerRef={imageContainerRef}
       />
       {imageFocused && (
         <UiOverlay
+          containerRef={imageContainerRef}
           imageRect={card?.imageRect}
           onImageRectChange={handleImageRectChange}
         />
