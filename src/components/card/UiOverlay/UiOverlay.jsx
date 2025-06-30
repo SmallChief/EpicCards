@@ -75,7 +75,6 @@ function UiOverlay({ imageRect, onImageRectChange }) {
     <div
       id="ui-overlay"
       style={{
-        position: "fixed",
         left: imageRect.left,
         top: imageRect.top,
         width: imageRect.width,

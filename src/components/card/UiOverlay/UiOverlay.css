@@ -1,5 +1,5 @@
 #ui-overlay {
-  position: fixed;
+  position: absolute;
   border: 2px dashed #888;
   pointer-events: none;
   box-sizing: border-box;
