@@ -1,6 +1,6 @@
 import "./ResizeHandle.css";
 
-function ResizeHandle({ position, onResize }) {
+function ResizeHandle({ position, onImageRectChange }) {
   // Handle mouse down event to start resizing
   const handleMouseDown = (e) => {
     e.preventDefault();
@@ -27,7 +27,7 @@ function ResizeHandle({ position, onResize }) {
       console.log("Resizing to:", newPosition);
 
       // Call the onResize callback with the new position
-      onResize(newPosition);
+      onImageRectChange(newPosition);
     };
 
     // Handle mouse up event to stop resizing
