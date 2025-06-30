@@ -17,17 +17,46 @@ function Card({ card, updateCard }) {
     setImageFocused(false);
   }
 
+  const getImageMeta = useCallback((url, cb) => {
+    const img = new Image();
+    img.onload = () => {
+      cb({
+        width: img.naturalWidth,
+        height: img.naturalHeight,
+        aspectRatio: img.naturalWidth / img.naturalHeight,
+      });
+    };
+    img.src = url;
+  }, []);
+
   function handleImageChange(image) {
     if (card) {
-      updateCard(card.id, { image: URL.createObjectURL(image) });
+      const imageUrl = URL.createObjectURL(image);
+      getImageMeta(imageUrl, (meta) => {
+        const newRect = {
+          left: 0,
+          top: 0,
+          width: meta.width || 200, // Default width if not available
+          height: meta.height || 200, // Default height if not available
+        };
+        updateCard(card.id, {
+          image: imageUrl,
+          imageRect: newRect,
+          imageAspectRatio: meta.aspectRatio || 1, // Default aspect ratio if not available
+        });
+        setImageRect(newRect); // Ensure local state is updated for immediate render
+      });
     }
   }
 
-  function handleImageMove(position) {
-    if (card) {
-      updateCard(card.id, { position });
-    }
-  }
+  const handleImageRectChange = useCallback(
+    (newRect) => {
+      if (card) {
+        updateCard(card.id, { imageRect: newRect });
+      }
+    },
+    [card, updateCard]
+  );
 
   // Callback to receive image rect from CardImage
   const handleImageRect = useCallback((rect) => {
@@ -44,8 +73,9 @@ function Card({ card, updateCard }) {
       <CardImage
         image={card?.image}
         position={card?.position || { x: 0, y: 0 }}
+        imageRect={card?.imageRect || imageRect} // Pass imageRect to CardImage
         onImageChange={handleImageChange}
-        onImageMove={handleImageMove}
+        onImageMove={handleImageRectChange}
         onImageRect={handleImageRect}
         onImageFocus={handleImageFocus}
         onImageBlur={handleImageBlur}
@@ -54,6 +84,7 @@ function Card({ card, updateCard }) {
         <UiOverlay
           position={card?.position || { x: 0, y: 0 }}
           imageRect={imageRect}
+          onImageRectChange={handleImageRectChange}
         />
       )}
 
