@@ -3,7 +3,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 function CardImage({
   image,
-  position,
+  imageRect,
+  // imageAspectRatio = 1,
   onImageChange,
   onImageMove,
   onImageRect,
@@ -18,7 +19,11 @@ function CardImage({
   const handleMouseDown = (e) => {
     setDragging(true);
     dragStart.current = { x: e.clientX, y: e.clientY };
-    imageStart.current = { x: position.x, y: position.y };
+
+    imageStart.current = {
+      x: imageRect.left,
+      y: imageRect.top,
+    };
   };
 
   const handleMouseMove = useCallback(
@@ -27,12 +32,14 @@ function CardImage({
         const dx = e.clientX - dragStart.current.x;
         const dy = e.clientY - dragStart.current.y;
         onImageMove({
-          x: imageStart.current.x + dx,
-          y: imageStart.current.y + dy,
+          left: imageStart.current.x + dx,
+          top: imageStart.current.y + dy,
+          width: imageRect.width,
+          height: imageRect.height,
         });
       }
     },
-    [dragging, onImageMove]
+    [dragging, onImageMove, imageRect?.width, imageRect?.height]
   );
 
   const handleMouseUp = useCallback(() => {
@@ -65,7 +72,7 @@ function CardImage({
         top: rect.top,
       });
     }
-  }, [image, position, onImageRect]);
+  }, [image, onImageRect]);
 
   // Handle image focus and blur on clicking the image
   const handleFocus = () => {
@@ -95,7 +102,13 @@ function CardImage({
         <img
           ref={imgRef}
           src={image}
-          style={{ left: position.x, top: position.y, position: "absolute" }}
+          style={{
+            position: "absolute",
+            left: imageRect.left,
+            top: imageRect.top,
+            width: imageRect.width,
+            height: imageRect.height,
+          }}
           onMouseDown={handleMouseDown}
           alt="Card"
           className="card__image-content"
