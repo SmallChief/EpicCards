@@ -7,7 +7,6 @@ function CardImage({
   // imageAspectRatio = 1,
   onImageChange,
   onImageMove,
-  onImageRect,
   onImageFocus,
   onImageBlur,
 }) {
@@ -60,19 +59,6 @@ function CardImage({
       window.removeEventListener("mouseup", handleMouseUp);
     };
   }, [dragging, handleMouseMove, handleMouseUp]);
-
-  // Report image rect to parent
-  useEffect(() => {
-    if (image && imgRef.current && onImageRect) {
-      const rect = imgRef.current.getBoundingClientRect();
-      onImageRect({
-        width: rect.width,
-        height: rect.height,
-        left: rect.left,
-        top: rect.top,
-      });
-    }
-  }, [image, onImageRect]);
 
   // Handle image focus and blur on clicking the image
   const handleFocus = () => {
