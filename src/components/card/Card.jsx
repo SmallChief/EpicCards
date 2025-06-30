@@ -78,6 +78,7 @@ function Card({ card, updateCard }) {
         <UiOverlay
           containerRef={imageContainerRef}
           imageRect={card?.imageRect}
+          aspectRatio={card?.imageAspectRatio}
           onImageRectChange={handleImageRectChange}
         />
       )}

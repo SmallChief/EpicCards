@@ -1,7 +1,12 @@
 import "./UiOverlay.css";
 import ResizeHandle from "./ResizeHandle.jsx";
 
-function UiOverlay({ imageRect, onImageRectChange, containerRef }) {
+function UiOverlay({
+  imageRect,
+  onImageRectChange,
+  containerRef,
+  aspectRatio,
+}) {
   if (!imageRect || !containerRef?.current) return null;
 
   // Ensure the imageRect is valid
@@ -24,53 +29,62 @@ function UiOverlay({ imageRect, onImageRectChange, containerRef }) {
     height: imageRect.height,
   };
 
-  function handleResize(corner, { x, y }) {
+  function handleResize(corner, { x }) {
     const offsetX = x - containerRect.left;
-    const offsetY = y - containerRect.top;
 
     let newRect = { ...imageRect };
     switch (corner) {
       case "top-left": {
         const dx = offsetX - imageRect.left;
-        const dy = offsetY - imageRect.top;
+        let newWidth = imageRect.width - dx;
+        let newHeight = newWidth / aspectRatio;
+        // Calculate the new top position
+        const bottom = imageRect.top + imageRect.height;
+        const newTop = bottom - newHeight;
         newRect = {
           left: offsetX,
-          top: offsetY,
-          width: imageRect.width - dx,
-          height: imageRect.height - dy,
+          top: newTop,
+          width: newWidth,
+          height: newHeight,
         };
         break;
       }
       case "top-right": {
         const dx = offsetX - (imageRect.left + imageRect.width);
-        const dy = offsetY - imageRect.top;
+        let newWidth = imageRect.width + dx;
+        let newHeight = newWidth / aspectRatio;
+        // Calculate the new top position
+        const bottom = imageRect.top + imageRect.height;
+        const newTop = bottom - newHeight;
         newRect = {
           left: imageRect.left,
-          top: offsetY,
-          width: imageRect.width + dx,
-          height: imageRect.height - dy,
+          top: newTop,
+          width: newWidth,
+          height: newHeight,
         };
         break;
       }
       case "bottom-left": {
         const dx = offsetX - imageRect.left;
-        const dy = offsetY - (imageRect.top + imageRect.height);
+        let newWidth = imageRect.width - dx;
+        let newHeight = newWidth / aspectRatio;
         newRect = {
           left: offsetX,
           top: imageRect.top,
-          width: imageRect.width - dx,
-          height: imageRect.height + dy,
+          width: newWidth,
+          height: newHeight,
         };
         break;
       }
       case "bottom-right": {
         const dx = offsetX - (imageRect.left + imageRect.width);
-        const dy = offsetY - (imageRect.top + imageRect.height);
+        let newWidth = imageRect.width + dx;
+        let newHeight = newWidth / aspectRatio;
         newRect = {
           left: imageRect.left,
           top: imageRect.top,
-          width: imageRect.width + dx,
-          height: imageRect.height + dy,
+          width: newWidth,
+          height: newHeight,
         };
         break;
       }
