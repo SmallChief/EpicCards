@@ -11,11 +11,16 @@ function App() {
   // Test data
   const testCard = {
     id: 1,
+
+    // Text fields
     title: "Test Card",
     description: "This is a test card for demonstration purposes.",
-    header: ["Test Header", "Another Header"],
+    textTopLeft: "Text Top-Left",
+    textTopRight: "Text Top-Right",
+
     image: null, // Initially no image
-    position: { x: 0, y: 0 }, // Initial position
+    imageRect: null, // Initial image rectangle
+    imageAspectRatio: 1, // Default aspect ratio
   };
 
   // Adding a test card for demonstration
