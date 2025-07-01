@@ -5,3 +5,17 @@
   box-sizing: border-box;
   z-index: 1000;
 }
+
+.ui-overlay__delete {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+  background-color: red;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  pointer-events: auto;
+  z-index: 1001;
+  border: none;
+}

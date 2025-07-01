@@ -6,6 +6,7 @@ function UiOverlay({
   onImageRectChange,
   containerRef,
   aspectRatio,
+  onDeleteImage,
 }) {
   if (!imageRect || !containerRef?.current) return null;
 
@@ -127,6 +128,17 @@ function UiOverlay({
         }}
         onImageRectChange={({ x, y }) => handleResize("bottom-right", { x, y })}
       />
+      {/* Delete Button */}
+      <button
+        className="ui-overlay__delete"
+        onMouseDown={(e) => {
+          e.stopPropagation(); // Prevent click from propagating to the overlay
+          e.preventDefault(); // Prevent default button behavior
+          onDeleteImage();
+        }}
+      >
+        Delete
+      </button>
     </div>
   );
 }
