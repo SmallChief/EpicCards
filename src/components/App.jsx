@@ -14,7 +14,7 @@ function App() {
 
     // Text fields
     title: "Test Card",
-    description: "This is a test card for demonstration purposes.",
+    description: "",
     textTopLeft: "Text Top-Left",
     textTopRight: "Text Top-Right",
 
@@ -43,9 +43,20 @@ function App() {
     console.log("Card updated:", id, changes);
   }
 
+  function handleExport() {
+    const cardData = JSON.stringify(cards, null, 2);
+    const blob = new Blob([cardData], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "cards.json";
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
   return (
     <>
-      <Menu />
+      <Menu onExport={handleExport} />
       <Workspace>
         {currentCard ? (
           <Card card={currentCard} updateCard={updateCard} />

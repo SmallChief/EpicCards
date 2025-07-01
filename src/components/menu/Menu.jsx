@@ -1,12 +1,11 @@
 import "./Menu.css";
 import Button from "../buttons/Button.jsx";
 
-function Menu() {
+function Menu({ onNewCard, onExport }) {
   return (
     <div id="menu">
-      <Button label="New Card" onClick={() => console.log("New Card")} />
-      <Button label="Export" onClick={() => console.log("Export")} />
-      <Button label="Settings" onClick={() => console.log("Settings")} />
+      <Button label="New Card" onClick={onNewCard} />
+      <Button label="Export" onClick={onExport} />
     </div>
   );
 }
