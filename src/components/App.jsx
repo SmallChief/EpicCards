@@ -94,9 +94,17 @@ function App() {
     reader.readAsText(file);
   }
 
+  function handleViewToggle() {
+    setView(view === "workspace" ? "list" : "workspace");
+  }
+
   return (
     <>
-      <Menu onExport={handleExport} onImport={handleImport} />
+      <Menu
+        onExport={handleExport}
+        onImport={handleImport}
+        onViewToggle={handleViewToggle}
+      />
       <div
         style={{
           display: "flex",
@@ -104,13 +112,7 @@ function App() {
           gap: "1rem",
           margin: "1rem",
         }}
-      >
-        <button
-          onClick={() => setView(view === "workspace" ? "list" : "workspace")}
-        >
-          Switch to {view === "workspace" ? "List View" : "Workspace"}
-        </button>
-      </div>
+      ></div>
       {view === "workspace" ? (
         <Workspace>
           {currentCard ? (
