@@ -10,6 +10,17 @@ function App() {
   const [currentCard, setCurrentCard] = useState(null);
   const [view, setView] = useState("workspace"); // "workspace" or "list"
 
+  const newCardTemplate = {
+    id: null,
+    title: "",
+    description: "",
+    textTopLeft: "",
+    textTopRight: "",
+    image: null, // Initially no image
+    imageRect: null, // Initial image rectangle
+    imageAspectRatio: 1, // Default aspect ratio
+  };
+
   // Test data
   const testCards = [
     {
@@ -51,6 +62,15 @@ function App() {
   if (cards.length === 0) {
     setCards(testCards);
     setCurrentCard(testCards[0]);
+  }
+
+  function addCard() {
+    const newCard = {
+      ...newCardTemplate,
+      id: cards.length > 0 ? Math.max(...cards.map((c) => c.id)) + 1 : 1, // Generate a new ID
+    };
+    setCards((prevCards) => [...prevCards, newCard]);
+    setCurrentCard(newCard);
   }
 
   function updateCard(id, changes) {
@@ -101,6 +121,7 @@ function App() {
   return (
     <>
       <Menu
+        onNewCard={addCard}
         onExport={handleExport}
         onImport={handleImport}
         onViewToggle={handleViewToggle}
