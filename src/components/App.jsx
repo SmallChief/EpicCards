@@ -9,24 +9,46 @@ function App() {
   const [currentCard, setCurrentCard] = useState(null);
 
   // Test data
-  const testCard = {
-    id: 1,
+  const testCards = [
+    {
+      id: 1,
 
-    // Text fields
-    title: "Test Card",
-    description: "",
-    textTopLeft: "Text Top-Left",
-    textTopRight: "Text Top-Right",
+      // Text fields
+      title: "Test Card",
+      description: "",
+      textTopLeft: "Text Top-Left",
+      textTopRight: "Text Top-Right",
 
-    image: null, // Initially no image
-    imageRect: null, // Initial image rectangle
-    imageAspectRatio: 1, // Default aspect ratio
-  };
+      image: null, // Initially no image
+      imageRect: null, // Initial image rectangle
+      imageAspectRatio: 1, // Default aspect ratio
+    },
+    {
+      id: 2,
+      title: "Another Card",
+      description: "This is another test card.",
+      textTopLeft: "Text 2 Top-Left",
+      textTopRight: "Text 2 Top-Right",
+      image: null, // Initially no image
+      imageRect: null, // Initial image rectangle
+      imageAspectRatio: 1, // Default aspect ratio
+    },
+    {
+      id: 3,
+      title: "Third Card",
+      description: "This is the third test card.",
+      textTopLeft: "Text 3 Top-Left",
+      textTopRight: "Text 3 Top-Right",
+      image: null, // Initially no image
+      imageRect: null, // Initial image rectangle
+      imageAspectRatio: 1, // Default aspect ratio
+    },
+  ];
 
   // Adding a test card for demonstration
   if (cards.length === 0) {
-    setCards([testCard]);
-    setCurrentCard(testCard);
+    setCards(testCards);
+    setCurrentCard(testCards[0]);
   }
 
   function updateCard(id, changes) {
