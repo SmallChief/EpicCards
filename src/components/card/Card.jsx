@@ -156,9 +156,9 @@ function Card({ card, updateCard }) {
       <textarea
         className="card__description"
         onChange={handleUpdateDescription}
-      >
-        Card Description
-      </textarea>
+        placeholder="Description"
+        value={card?.description || ""}
+      ></textarea>
     </div>
   );
 }
