@@ -87,6 +87,13 @@ function App() {
     console.log("Card updated:", id, changes);
   }
 
+  function deleteCurrentCard() {
+    if (!currentCard) return;
+    setCards((prev) => prev.filter((c) => c.id !== currentCard.id));
+    setCurrentCard(null);
+    setView("list");
+  }
+
   function handleExport() {
     const cardData = JSON.stringify(cards, null, 2);
     const blob = new Blob([cardData], { type: "application/json" });
@@ -135,7 +142,10 @@ function App() {
         }}
       ></div>
       {view === "workspace" ? (
-        <Workspace>
+        <Workspace
+          onDeleteCard={deleteCurrentCard}
+          showDeleteButton={!!currentCard}
+        >
           {currentCard ? (
             <Card card={currentCard} updateCard={updateCard} />
           ) : (
