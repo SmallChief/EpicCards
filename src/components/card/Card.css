@@ -20,9 +20,10 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
 
+    font-size: 0.875rem;
+
     & input {
       width: 100%;
-      padding: 0.25rem;
       border: none;
     }
 
@@ -33,11 +34,16 @@
 
   & .card__title {
     font-weight: bold;
+    border: none;
+    padding: 0.125rem;
   }
 
   & .card__description {
-    color: #666;
+    color: hsl(0, 0%, 15%);
     flex-grow: 1;
+    font-size: 0.875rem;
+    border: none;
+    resize: none;
 
     background: #f9f9f9;
   }

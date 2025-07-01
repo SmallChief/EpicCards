@@ -83,12 +83,48 @@ function Card({ card, updateCard }) {
     [card, updateCard]
   );
 
+  function handleUpdateTextTopLeft(e) {
+    const newText = e.target.value;
+    if (card) {
+      updateCard(card.id, { textTopLeft: newText });
+    }
+  }
+
+  function handleUpdateTextTopRight(e) {
+    const newText = e.target.value;
+    if (card) {
+      updateCard(card.id, { textTopRight: newText });
+    }
+  }
+
+  function handleUpdateTitle(e) {
+    const newTitle = e.target.value;
+    if (card) {
+      updateCard(card.id, { title: newTitle });
+    }
+  }
+
+  function handleUpdateDescription(e) {
+    const newDescription = e.target.value;
+    if (card) {
+      updateCard(card.id, { description: newDescription });
+    }
+  }
+
   return (
     <div className="card">
       <div className="card__bg"></div>
       <div className="card__header">
-        <input className="card__text-row" defaultValue="Text Top-Left" />
-        <input className="card__text-row" defaultValue="Text Top-Right" />
+        <input
+          className="card__text-row"
+          defaultValue="Text Top-Left"
+          onChange={handleUpdateTextTopLeft}
+        />
+        <input
+          className="card__text-row"
+          defaultValue="Text Top-Right"
+          onChange={handleUpdateTextTopRight}
+        />
       </div>
       <CardImage
         image={card?.image}
@@ -110,8 +146,19 @@ function Card({ card, updateCard }) {
         />
       )}
 
-      <div className="card__title">Card Title</div>
-      <div className="card__description">Card Description</div>
+      <input
+        type="text"
+        name="title"
+        id="title"
+        className="card__title"
+        onChange={handleUpdateTitle}
+      />
+      <textarea
+        className="card__description"
+        onChange={handleUpdateDescription}
+      >
+        Card Description
+      </textarea>
     </div>
   );
 }
