@@ -122,12 +122,12 @@ function Card({ card, updateCard }) {
       <div className="card__header">
         <input
           className="card__text-row"
-          defaultValue="Text Top-Left"
+          value={card?.textTopLeft || "Text Top-Left"}
           onChange={handleUpdateTextTopLeft}
         />
         <input
           className="card__text-row"
-          defaultValue="Text Top-Right"
+          value={card?.textTopRight || "Text Top-Right"}
           onChange={handleUpdateTextTopRight}
         />
       </div>
