@@ -54,9 +54,25 @@ function App() {
     URL.revokeObjectURL(url);
   }
 
+  function handleImport(file) {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        const importedCards = JSON.parse(event.target.result);
+        setCards(importedCards);
+        if (importedCards.length > 0) {
+          setCurrentCard(importedCards[0]);
+        }
+      } catch (error) {
+        console.error("Error importing cards:", error);
+      }
+    };
+    reader.readAsText(file);
+  }
+
   return (
     <>
-      <Menu onExport={handleExport} />
+      <Menu onExport={handleExport} onImport={handleImport} />
       <Workspace>
         {currentCard ? (
           <Card card={currentCard} updateCard={updateCard} />
