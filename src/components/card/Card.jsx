@@ -122,12 +122,12 @@ function Card({ card, updateCard }) {
       <div className="card__header">
         <input
           className="card__text-row"
-          value={card?.textTopLeft || "Text Top-Left"}
+          value={card?.textTopLeft}
           onChange={handleUpdateTextTopLeft}
         />
         <input
           className="card__text-row"
-          value={card?.textTopRight || "Text Top-Right"}
+          value={card?.textTopRight}
           onChange={handleUpdateTextTopRight}
         />
       </div>
