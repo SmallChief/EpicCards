@@ -1,6 +1,6 @@
 # EpicCards
 
-EpicCards is a modern, interactive card editor and manager built with React and Vite. It allows you to create, edit, preview, and organize custom cards with images and text, all in a clean and responsive interface.
+EpicCards is a modern, interactive card editor built with React and Vite. It allows you to create, edit, preview, and organize custom cards with images and text, all in a clean and responsive interface.
 
 ## Features
 
