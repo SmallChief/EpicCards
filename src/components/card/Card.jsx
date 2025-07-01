@@ -46,21 +46,26 @@ function Card({ card, updateCard }) {
 
   function handleImageChange(image) {
     if (card) {
-      const imageUrl = URL.createObjectURL(image);
-      getImageMeta(imageUrl, (meta) => {
-        // Calculate initial rectangle based on image metadata
-        const initialRect = calcInitialImageRect(
-          meta,
-          meta.aspectRatio, // Default aspect ratio if not available
-          imageContainerRef.current?.offsetWidth || 200 // Default max width if container not available
-        );
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const imageUrl = e.target.result;
+        getImageMeta(imageUrl, (meta) => {
+          // Calculate initial rectangle based on image metadata
+          const initialRect = calcInitialImageRect(
+            meta,
+            meta.aspectRatio, // Default aspect ratio if not available
+            imageContainerRef.current?.offsetWidth || 200 // Default max width if container not available
+          );
 
-        updateCard(card.id, {
-          image: imageUrl,
-          imageRect: initialRect,
-          imageAspectRatio: meta.aspectRatio || 1, // Default aspect ratio if not available
+          updateCard(card.id, {
+            image: imageUrl,
+            imageRect: initialRect,
+            imageAspectRatio: meta.aspectRatio || 1, // Default aspect ratio if not available
+          });
         });
-      });
+      };
+
+      reader.readAsDataURL(image);
     }
   }
 
