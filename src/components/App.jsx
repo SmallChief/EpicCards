@@ -2,11 +2,13 @@ import "./App.css";
 import Menu from "./menu/Menu.jsx";
 import Workspace from "./workspace/Workspace.jsx";
 import Card from "./card/Card.jsx";
+import CardListView from "./card/CardListView.jsx";
 import { useState } from "react";
 
 function App() {
   const [cards, setCards] = useState([]);
   const [currentCard, setCurrentCard] = useState(null);
+  const [view, setView] = useState("workspace"); // "workspace" or "list"
 
   // Test data
   const testCards = [
@@ -95,13 +97,37 @@ function App() {
   return (
     <>
       <Menu onExport={handleExport} onImport={handleImport} />
-      <Workspace>
-        {currentCard ? (
-          <Card card={currentCard} updateCard={updateCard} />
-        ) : (
-          <Card />
-        )}
-      </Workspace>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "1rem",
+          margin: "1rem",
+        }}
+      >
+        <button
+          onClick={() => setView(view === "workspace" ? "list" : "workspace")}
+        >
+          Switch to {view === "workspace" ? "List View" : "Workspace"}
+        </button>
+      </div>
+      {view === "workspace" ? (
+        <Workspace>
+          {currentCard ? (
+            <Card card={currentCard} updateCard={updateCard} />
+          ) : (
+            <Card />
+          )}
+        </Workspace>
+      ) : (
+        <CardListView
+          cards={cards}
+          onSelectCard={(card) => {
+            setCurrentCard(card);
+            setView("workspace");
+          }}
+        />
+      )}
     </>
   );
 }
