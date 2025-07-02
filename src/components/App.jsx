@@ -235,8 +235,8 @@ function App() {
             onChangeTitle={(e) =>
               updateCard(currentCard.id, { title: e.target.value })
             }
-            onChangeDescription={(e) =>
-              updateCard(currentCard.id, { description: e.target.value })
+            onChangeDescription={(doc) =>
+              updateCard(currentCard.id, { description: doc })
             }
             onDeleteImage={() =>
               updateCard(currentCard.id, { image: null, imageRect: null })

@@ -1,4 +1,5 @@
 import "./Sidebar.css";
+import RichtextArea from "../card/RichtextArea.jsx";
 
 function Sidebar({
   card,
@@ -14,6 +15,13 @@ function Sidebar({
   onImageAlignBottom,
   onImageAlignCenter,
 }) {
+  function handleUpdateDescription(document) {
+    const newDescription = document;
+    if (card) {
+      onChangeDescription(newDescription);
+    }
+  }
+
   return (
     <div className="sidebar">
       {/* Card Inputs */}
@@ -41,7 +49,10 @@ function Sidebar({
         </label>
         <label>
           Card Description:
-          <textarea value={card.description} onChange={onChangeDescription} />
+          <RichtextArea
+            card={card}
+            onUpdateDescription={handleUpdateDescription}
+          />
         </label>
 
         <div className="divider"></div>
