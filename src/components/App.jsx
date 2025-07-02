@@ -29,7 +29,12 @@ function App() {
 
       // Text fields
       title: "Test Card",
-      description: "",
+      description: [
+        {
+          type: "paragraph",
+          content: "This is a new Card!",
+        },
+      ],
       textTopLeft: "Text Top-Left",
       textTopRight: "Text Top-Right",
 
@@ -41,7 +46,12 @@ function App() {
     {
       id: 2,
       title: "Another Card",
-      description: "This is another test card.",
+      description: [
+        {
+          type: "paragraph",
+          content: "This is another Card!",
+        },
+      ],
       textTopLeft: "Text 2 Top-Left",
       textTopRight: "Text 2 Top-Right",
       image: null, // Initially no image
@@ -52,7 +62,12 @@ function App() {
     {
       id: 3,
       title: "Third Card",
-      description: "This is the third test card.",
+      description: [
+        {
+          type: "paragraph",
+          content: "This is the third Card!",
+        },
+      ],
       textTopLeft: "Text 3 Top-Left",
       textTopRight: "Text 3 Top-Right",
       image: null, // Initially no image
