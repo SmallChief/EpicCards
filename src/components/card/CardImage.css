@@ -25,6 +25,7 @@
 
   overflow: hidden;
   position: relative;
+  flex-shrink: 0;
 }
 
 .card__image-content {
