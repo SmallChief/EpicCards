@@ -1,6 +1,7 @@
 import "./App.css";
 import Menu from "./menu/Menu.jsx";
 import Workspace from "./workspace/Workspace.jsx";
+import Sidebar from "./workspace/Sidebar.jsx";
 import Card from "./card/Card.jsx";
 import CardListView from "./card/CardListView.jsx";
 import { useState } from "react";
@@ -33,6 +34,7 @@ function App() {
       textTopRight: "Text Top-Right",
 
       image: null, // Initially no image
+      imageName: "", // Initially no image name
       imageRect: null, // Initial image rectangle
       imageAspectRatio: 1, // Default aspect ratio
     },
@@ -43,6 +45,7 @@ function App() {
       textTopLeft: "Text 2 Top-Left",
       textTopRight: "Text 2 Top-Right",
       image: null, // Initially no image
+      imageName: "", // Initially no image name
       imageRect: null, // Initial image rectangle
       imageAspectRatio: 1, // Default aspect ratio
     },
@@ -53,6 +56,7 @@ function App() {
       textTopLeft: "Text 3 Top-Left",
       textTopRight: "Text 3 Top-Right",
       image: null, // Initially no image
+      imageName: "", // Initially no image name
       imageRect: null, // Initial image rectangle
       imageAspectRatio: 1, // Default aspect ratio
     },
@@ -125,6 +129,64 @@ function App() {
     setView(view === "workspace" ? "list" : "workspace");
   }
 
+  function handleImageAlignLeft() {
+    if (currentCard) {
+      updateCard(currentCard.id, {
+        imageRect: { ...currentCard.imageRect, left: 0 },
+      });
+    }
+  }
+
+  function handleImageAlignRight() {
+    if (currentCard && currentCard.imageRect) {
+      // Find the image container element
+      const container = document.querySelector(".card__image");
+      const containerWidth = container ? container.offsetWidth : 0;
+      const imageWidth = currentCard.imageRect.width || 0;
+      const newLeft = containerWidth - imageWidth;
+
+      updateCard(currentCard.id, {
+        imageRect: { ...currentCard.imageRect, left: newLeft },
+      });
+    }
+  }
+
+  function handleImageAlignTop() {
+    if (currentCard) {
+      updateCard(currentCard.id, {
+        imageRect: { ...currentCard.imageRect, top: 0 },
+      });
+    }
+  }
+
+  function handleImageAlignBottom() {
+    if (currentCard && currentCard.imageRect) {
+      // Find the image container element
+      const container = document.querySelector(".card__image");
+      const containerHeight = container ? container.offsetHeight : 0;
+      const imageHeight = currentCard.imageRect.height || 0;
+      const newTop = containerHeight - imageHeight;
+      updateCard(currentCard.id, {
+        imageRect: { ...currentCard.imageRect, top: newTop },
+      });
+    }
+  }
+
+  function handleImageAlignCenter() {
+    if (currentCard && currentCard.imageRect) {
+      // Find the image container element
+      const container = document.querySelector(".card__image");
+      const containerWidth = container ? container.offsetWidth : 0;
+      const imageWidth = currentCard.imageRect.width || 0;
+      const newLeft = (containerWidth - imageWidth) / 2;
+      const newTop =
+        (container.offsetHeight - currentCard.imageRect.height) / 2;
+      updateCard(currentCard.id, {
+        imageRect: { ...currentCard.imageRect, left: newLeft, top: newTop },
+      });
+    }
+  }
+
   return (
     <>
       <Menu
@@ -146,6 +208,30 @@ function App() {
           onDeleteCard={deleteCurrentCard}
           showDeleteButton={!!currentCard}
         >
+          <Sidebar
+            card={currentCard}
+            onDeleteCard={deleteCurrentCard}
+            onChangeTextTopLeft={(e) =>
+              updateCard(currentCard.id, { textTopLeft: e.target.value })
+            }
+            onChangeTextTopRight={(e) =>
+              updateCard(currentCard.id, { textTopRight: e.target.value })
+            }
+            onChangeTitle={(e) =>
+              updateCard(currentCard.id, { title: e.target.value })
+            }
+            onChangeDescription={(e) =>
+              updateCard(currentCard.id, { description: e.target.value })
+            }
+            onDeleteImage={() =>
+              updateCard(currentCard.id, { image: null, imageRect: null })
+            }
+            onImageAlignLeft={handleImageAlignLeft}
+            onImageAlignRight={handleImageAlignRight}
+            onImageAlignTop={handleImageAlignTop}
+            onImageAlignBottom={handleImageAlignBottom}
+            onImageAlignCenter={handleImageAlignCenter}
+          />
           {currentCard ? (
             <Card card={currentCard} updateCard={updateCard} />
           ) : (
