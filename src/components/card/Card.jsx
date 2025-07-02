@@ -59,6 +59,7 @@ function Card({ card, updateCard }) {
 
           updateCard(card.id, {
             image: imageUrl,
+            imageName: image.name,
             imageRect: initialRect,
             imageAspectRatio: meta.aspectRatio || 1, // Default aspect ratio if not available
           });
@@ -155,6 +156,7 @@ function Card({ card, updateCard }) {
         type="text"
         name="title"
         id="title"
+        value={card?.title}
         className="card__title"
         onChange={handleUpdateTitle}
       />
