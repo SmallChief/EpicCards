@@ -2,6 +2,7 @@ import "./Card.css";
 import CardImage from "./CardImage.jsx";
 import UiOverlay from "./UiOverlay/UiOverlay.jsx";
 import { useState, useCallback, useRef } from "react";
+import RichtextArea from "./RichtextArea.jsx";
 
 function Card({ card, updateCard }) {
   const [imageFocused, setImageFocused] = useState(false);
@@ -110,8 +111,8 @@ function Card({ card, updateCard }) {
     }
   }
 
-  function handleUpdateDescription(e) {
-    const newDescription = e.target.value;
+  function handleUpdateDescription(document) {
+    const newDescription = document;
     if (card) {
       updateCard(card.id, { description: newDescription });
     }
@@ -119,7 +120,7 @@ function Card({ card, updateCard }) {
 
   return (
     <div className="card">
-      <div className="card__bg"></div>
+      {/* <div className="card__bg"></div> */}
       <div className="card__header">
         <input
           className="card__text-row"
@@ -160,12 +161,7 @@ function Card({ card, updateCard }) {
         className="card__title"
         onChange={handleUpdateTitle}
       />
-      <textarea
-        className="card__description"
-        onChange={handleUpdateDescription}
-        placeholder="Description"
-        value={card?.description || ""}
-      ></textarea>
+      <RichtextArea card={card} onUpdateDescription={handleUpdateDescription} />
     </div>
   );
 }
