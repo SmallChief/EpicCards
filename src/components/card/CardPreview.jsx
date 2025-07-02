@@ -1,4 +1,5 @@
 import "./Card.css";
+import RichtextArea from "./RichtextArea";
 
 function CardPreview({ card }) {
   return (
@@ -48,7 +49,13 @@ function CardPreview({ card }) {
         )}
       </div>
       <div className="card__title">{card?.title}</div>
-      <div className="card__description">{card?.description}</div>
+      {/* <div className="card__description">{card?.description}</div> */}
+      <RichtextArea
+        card={card}
+        onUpdateDescription={() => {
+          console.warn("Cannot not edit a preview card");
+        }}
+      />
     </div>
   );
 }
