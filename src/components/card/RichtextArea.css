@@ -1,19 +1,26 @@
 .richtext-area {
+  --bg-color: hsl(0, 0%, 97.5%);
   width: 100%;
   /* height: 100%; */
   /* padding: 10px; */
-  border: none;
-  outline: none;
-  resize: none;
-  font-size: 16px;
-  line-height: 1.5;
+  line-height: 1;
   flex-grow: 1;
-}
+  background-color: var(--bg-color);
+  border-radius: 0.25rem;
 
-.bn-editor {
-  padding-inline: 0 !important;
-}
+  .bn-editor {
+    padding: 0.125rem !important;
+    background-color: var(--bg-color) !important;
+    height: 100% !important;
+  }
 
-.bn-default-styles {
-  font-size: 14px !important;
+  .bn-default-styles {
+    font-size: 14px !important;
+  }
+
+  .bn-block-outer {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.2 !important;
+  }
 }
