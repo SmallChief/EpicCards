@@ -23,14 +23,14 @@ h6 {
     width: 100%;
   }
 
-  & input,
+  & input:not([type="checkbox"]),
   & textarea,
   & select {
     border: 1px solid #ccc;
     outline: 1px solid black;
   }
 
-  & input {
+  & input:not([type="checkbox"]) {
     padding: 0.25rem;
     margin-bottom: 10px;
     border-radius: 4px;
