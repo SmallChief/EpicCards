@@ -4,10 +4,6 @@ import RichtextArea from "../card/RichtextArea.jsx";
 function Sidebar({
   card,
   onDeleteCard,
-  onChangeTitle,
-  onChangeDescription,
-  onChangeTextTopLeft,
-  onChangeTextTopRight,
   onDeleteImage,
   onImageAlignLeft,
   onImageAlignRight,
@@ -15,45 +11,71 @@ function Sidebar({
   onImageAlignBottom,
   onImageAlignCenter,
 }) {
-  function handleUpdateDescription(document) {
-    const newDescription = document;
-    if (card) {
-      onChangeDescription(newDescription);
-    }
-  }
-
   return (
     <div className="sidebar">
       {/* Card Inputs */}
       <h3>Text Content</h3>
       <div className="sidebar__card-inputs">
+        <h4>Top Left Text:</h4>
         <label>
-          Top Left Text:
-          <input
-            type="text"
-            value={card.textTopLeft}
-            onChange={onChangeTextTopLeft}
-          />
+          Color:
+          <input type="color" />
         </label>
+        <h4>Font</h4>
         <label>
-          Top Right Text:
-          <input
-            type="text"
-            value={card.textTopRight}
-            onChange={onChangeTextTopRight}
-          />
+          Size
+          <input type="number" min="8" max="16" defaultValue="12" />
         </label>
+        <div>
+          Style
+          <label class="checkbox-label">
+            <span>Bold</span>
+            <input type="checkbox" name="tul_txt-opt-bold" value="bold" />
+          </label>
+          <label class="checkbox-label">
+            <span>Italic</span>
+            <input type="checkbox" name="tul_txt-opt-italic" value="italic" />
+          </label>
+          <label class="checkbox-label">
+            <span>Underline</span>
+            <input
+              type="checkbox"
+              name="tul_txt-opt-underline"
+              value="underline"
+            />
+          </label>
+        </div>
+
+        <div className="divider"></div>
+        <h4>Top Right Text:</h4>
         <label>
-          Card Title:
-          <input type="text" value={card.title} onChange={onChangeTitle} />
+          Color:
+          <input type="color" />
         </label>
+        <h4>Font</h4>
         <label>
-          Card Description:
-          <RichtextArea
-            card={card}
-            onUpdateDescription={handleUpdateDescription}
-          />
+          Size
+          <input type="number" min="8" max="16" defaultValue="12" />
         </label>
+        <div>
+          Style
+          <label className="checkbox-label">
+            <span>Bold</span>
+            <input type="checkbox" name="tur_txt-opt-bold" value="bold" />
+          </label>
+          <label className="checkbox-label">
+            <span>Italic</span>
+            <input type="checkbox" name="tur_txt-opt-italic" value="italic" />
+          </label>
+          <label className="checkbox-label">
+            <span>Underline</span>
+            <input
+              type="checkbox"
+              name="tur_txt-opt-underline"
+              value="underline"
+            />
+          </label>
+        </div>
 
         <div className="divider"></div>
         <h3>Image</h3>
