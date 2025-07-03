@@ -21,7 +21,7 @@
   box-sizing: border-box;
 }
 
-input,
+input:not([type="checkbox"]),
 textarea,
 select,
 button {
@@ -35,6 +35,29 @@ button {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+}
+
+label.checkbox-label {
+  & * {
+    width: unset;
+  }
+  width: 100%;
+  display: flex;
+  font-size: 15px;
+  line-height: 17px;
+  color: black;
+  width: 100%;
+  margin-bottom: 0px;
+  justify-content: space-between;
+}
+
+input[type="checkbox"] {
+  appearance: checkbox;
+  -webkit-appearance: checkbox;
+  -moz-appearance: checkbox;
+  margin-bottom: 0;
+
+  vertical-align: middle;
 }
 
 @media (prefers-color-scheme: light) {
