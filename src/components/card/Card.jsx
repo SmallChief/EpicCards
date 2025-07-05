@@ -126,11 +126,25 @@ function Card({ card, updateCard }) {
           className="card__text-row"
           value={card?.textTopLeft}
           onChange={handleUpdateTextTopLeft}
+          style={{
+            color: card?.textTopLeftOptions?.color || "#000000",
+            fontSize: card?.textTopLeftOptions?.fontSize + "px" || "12px",
+            fontWeight: card?.textTopLeftOptions?.bold ? "bold" : "normal",
+            fontStyle: card?.textTopLeftOptions?.italic ? "italic" : "normal",
+            textDecoration: card?.textTopLeftOptions?.underline ? "underline" : "none",
+          }}
         />
         <input
           className="card__text-row"
           value={card?.textTopRight}
           onChange={handleUpdateTextTopRight}
+          style={{
+            color: card?.textTopRightOptions?.color || "#000000",
+            fontSize: card?.textTopRightOptions?.fontSize + "px" || "12px",
+            fontWeight: card?.textTopRightOptions?.bold ? "bold" : "normal",
+            fontStyle: card?.textTopRightOptions?.italic ? "italic" : "normal",
+            textDecoration: card?.textTopRightOptions?.underline ? "underline" : "none",
+          }}
         />
       </div>
       <CardImage
