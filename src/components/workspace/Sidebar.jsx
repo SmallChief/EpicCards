@@ -4,6 +4,8 @@ import RichtextArea from "../card/RichtextArea.jsx";
 function Sidebar({
   card,
   onDeleteCard,
+  onChangeTextTopLeftOptions,
+  onChangeTextTopRightOptions,
   onDeleteImage,
   onImageAlignLeft,
   onImageAlignRight,
@@ -11,6 +13,9 @@ function Sidebar({
   onImageAlignBottom,
   onImageAlignCenter,
 }) {
+  const txtLeftArgs = card.textTopLeftOptions || {};
+  const txtRightArgs = card.textTopRightOptions || {};
+
   return (
     <div className="sidebar">
       {/* Card Inputs */}
@@ -19,22 +24,53 @@ function Sidebar({
         <h4>Top Left Text:</h4>
         <label>
           Color:
-          <input type="color" />
+          <input
+            type="color"
+            value={txtLeftArgs.color || "#000000"}
+            onChange={(e) =>
+              onChangeTextTopLeftOptions({ color: e.target.value })
+            }
+          />
         </label>
         <h4>Font</h4>
         <label>
           Size
-          <input type="number" min="8" max="16" defaultValue="12" />
+          <input
+            type="number"
+            min="8"
+            max="16"
+            defaultValue="12"
+            value={txtLeftArgs.fontSize}
+            onChange={(e) =>
+              onChangeTextTopLeftOptions({ fontSize: e.target.value })
+            }
+          />
         </label>
         <div>
           Style
           <label class="checkbox-label">
             <span>Bold</span>
-            <input type="checkbox" name="tul_txt-opt-bold" value="bold" />
+            <input
+              type="checkbox"
+              name="tul_txt-opt-bold"
+              value="bold"
+              checked={txtLeftArgs.bold || false}
+              onChange={(e) =>
+                onChangeTextTopLeftOptions({ bold: e.target.checked })
+              }
+            />
           </label>
           <label class="checkbox-label">
             <span>Italic</span>
-            <input type="checkbox" name="tul_txt-opt-italic" value="italic" />
+            <input
+              type="checkbox"
+              name="tul_txt-opt-italic"
+              value="italic"
+              checked={txtLeftArgs.italic || false}
+              onChange={(e) =>
+                onChangeTextTopLeftOptions({ italic: e.target.checked })
+              }
+            />
           </label>
           <label class="checkbox-label">
             <span>Underline</span>
@@ -42,6 +78,10 @@ function Sidebar({
               type="checkbox"
               name="tul_txt-opt-underline"
               value="underline"
+              checked={txtLeftArgs.underline || false}
+              onChange={(e) =>
+                onChangeTextTopLeftOptions({ underline: e.target.checked })
+              }
             />
           </label>
         </div>
@@ -50,22 +90,53 @@ function Sidebar({
         <h4>Top Right Text:</h4>
         <label>
           Color:
-          <input type="color" />
+          <input
+            type="color"
+            value={txtRightArgs.color || "#000000"}
+            onChange={(e) =>
+              onChangeTextTopRightOptions({ color: e.target.value })
+            }
+          />
         </label>
         <h4>Font</h4>
         <label>
           Size
-          <input type="number" min="8" max="16" defaultValue="12" />
+          <input
+            type="number"
+            min="8"
+            max="16"
+            defaultValue="12"
+            value={txtRightArgs.fontSize}
+            onChange={(e) =>
+              onChangeTextTopRightOptions({ fontSize: e.target.value })
+            }
+          />
         </label>
         <div>
           Style
           <label className="checkbox-label">
             <span>Bold</span>
-            <input type="checkbox" name="tur_txt-opt-bold" value="bold" />
+            <input
+              type="checkbox"
+              name="tur_txt-opt-bold"
+              value="bold"
+              checked={txtRightArgs.bold || false}
+              onChange={(e) =>
+                onChangeTextTopRightOptions({ bold: e.target.checked })
+              }
+            />
           </label>
           <label className="checkbox-label">
             <span>Italic</span>
-            <input type="checkbox" name="tur_txt-opt-italic" value="italic" />
+            <input
+              type="checkbox"
+              name="tur_txt-opt-italic"
+              value="italic"
+              checked={txtRightArgs.italic || false}
+              onChange={(e) =>
+                onChangeTextTopRightOptions({ italic: e.target.checked })
+              }
+            />
           </label>
           <label className="checkbox-label">
             <span>Underline</span>
@@ -73,6 +144,10 @@ function Sidebar({
               type="checkbox"
               name="tur_txt-opt-underline"
               value="underline"
+              checked={txtRightArgs.underline || false}
+              onChange={(e) =>
+                onChangeTextTopRightOptions({ underline: e.target.checked })
+              }
             />
           </label>
         </div>
