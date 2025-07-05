@@ -16,7 +16,21 @@ function App() {
     title: "",
     description: "",
     textTopLeft: "",
+    textTopLeftOptions: {
+      color: "#000000", // Default color
+      fontSize: "12", // Default font size
+      bold: false, // Default bold
+      italic: false, // Default italic
+      underline: false, // Default underline
+    },
     textTopRight: "",
+    textTopRightOptions: {
+      color: "#000000", // Default color
+      fontSize: "12", // Default font size
+      bold: false, // Default bold
+      italic: false, // Default italic
+      underline: false, // Default underline
+    },
     image: null, // Initially no image
     imageRect: null, // Initial image rectangle
     imageAspectRatio: 1, // Default aspect ratio
@@ -36,7 +50,23 @@ function App() {
         },
       ],
       textTopLeft: "Text Top-Left",
+      // Text options
+      textTopLeftOptions: {
+        color: "#0000ff",
+        fontSize: "16",
+        bold: true,
+        italic: false,
+        underline: false,
+      },
       textTopRight: "Text Top-Right",
+      // Text options
+      textTopRightOptions: {
+        color: "#ff0000",
+        fontSize: "15",
+        bold: false,
+        italic: true,
+        underline: false,
+      },
 
       image: null, // Initially no image
       imageName: "", // Initially no image name
@@ -202,6 +232,22 @@ function App() {
     }
   }
 
+  function handleUpdateTextTopLeftOptions(options) {
+    if (currentCard) {
+      updateCard(currentCard.id, {
+        textTopLeftOptions: { ...currentCard.textTopLeftOptions, ...options },
+      });
+    }
+  }
+
+  function handleUpdateTextTopRightOptions(options) {
+    if (currentCard) {
+      updateCard(currentCard.id, {
+        textTopRightOptions: { ...currentCard.textTopRightOptions, ...options },
+      });
+    }
+  }
+
   return (
     <>
       <Menu
@@ -226,18 +272,8 @@ function App() {
           <Sidebar
             card={currentCard}
             onDeleteCard={deleteCurrentCard}
-            onChangeTextTopLeft={(e) =>
-              updateCard(currentCard.id, { textTopLeft: e.target.value })
-            }
-            onChangeTextTopRight={(e) =>
-              updateCard(currentCard.id, { textTopRight: e.target.value })
-            }
-            onChangeTitle={(e) =>
-              updateCard(currentCard.id, { title: e.target.value })
-            }
-            onChangeDescription={(doc) =>
-              updateCard(currentCard.id, { description: doc })
-            }
+            onChangeTextTopLeftOptions={handleUpdateTextTopLeftOptions}
+            onChangeTextTopRightOptions={handleUpdateTextTopRightOptions}
             onDeleteImage={() =>
               updateCard(currentCard.id, { image: null, imageRect: null })
             }
