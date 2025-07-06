@@ -101,7 +101,7 @@ function App() {
       ],
       textTopLeft: "Text 3 Top-Left",
       textTopRight: "Text 3 Top-Right",
-      backgroundColor:"#ccc",
+      backgroundColor:"#cccccc",
       image: null, // Initially no image
       imageName: "", // Initially no image name
       imageRect: null, // Initial image rectangle
