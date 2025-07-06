@@ -31,6 +31,7 @@ function App() {
       italic: false, // Default italic
       underline: false, // Default underline
     },
+    backgroundColor: "#ffffff", // Default background color
     image: null, // Initially no image
     imageRect: null, // Initial image rectangle
     imageAspectRatio: 1, // Default aspect ratio
@@ -67,7 +68,7 @@ function App() {
         italic: true,
         underline: false,
       },
-
+      backgroundColor: "#f0f0f0", // Default background color
       image: null, // Initially no image
       imageName: "", // Initially no image name
       imageRect: null, // Initial image rectangle
@@ -100,6 +101,7 @@ function App() {
       ],
       textTopLeft: "Text 3 Top-Left",
       textTopRight: "Text 3 Top-Right",
+      backgroundColor:"#ccc",
       image: null, // Initially no image
       imageName: "", // Initially no image name
       imageRect: null, // Initial image rectangle
@@ -248,6 +250,12 @@ function App() {
     }
   }
 
+  function handleChangeBackgroundColor (color) {
+    if (currentCard) {
+      updateCard(currentCard.id, { backgroundColor: color });
+    }
+  }
+
   return (
     <>
       <Menu
@@ -272,6 +280,7 @@ function App() {
           <Sidebar
             card={currentCard}
             onDeleteCard={deleteCurrentCard}
+            onChangeBackgroundColor={handleChangeBackgroundColor}
             onChangeTextTopLeftOptions={handleUpdateTextTopLeftOptions}
             onChangeTextTopRightOptions={handleUpdateTextTopRightOptions}
             onDeleteImage={() =>

@@ -119,8 +119,11 @@ function Card({ card, updateCard }) {
   }
 
   return (
-    <div className="card">
-      {/* <div className="card__bg"></div> */}
+    <div className="card"
+    style={{
+      backgroundColor: card?.backgroundColor || "#ffffff",
+    }}
+    >
       <div className="card__header">
         <input
           className="card__text-row"

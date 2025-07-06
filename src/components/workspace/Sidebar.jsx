@@ -4,6 +4,7 @@ import RichtextArea from "../card/RichtextArea.jsx";
 function Sidebar({
   card,
   onDeleteCard,
+  onChangeBackgroundColor,
   onChangeTextTopLeftOptions,
   onChangeTextTopRightOptions,
   onDeleteImage,
@@ -18,7 +19,20 @@ function Sidebar({
 
   return (
     <div className="sidebar">
-      {/* Card Inputs */}
+      <h3>General</h3>
+      <div className="sidebar__card-inputs">
+        <label>
+          Background Color
+          <input
+            type="color"
+            value={card.backgroundColor || "#ffffff"}
+            onChange={(e) =>
+              onChangeBackgroundColor(e.target.value)
+            }
+          />
+        </label>
+      </div>
+      <div className="divider"></div>
       <h3>Text Content</h3>
       <div className="sidebar__card-inputs">
         <h4>Top Left Text:</h4>
