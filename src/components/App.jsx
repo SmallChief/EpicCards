@@ -9,7 +9,7 @@ import { useState } from "react";
 function App() {
   const [cards, setCards] = useState([]);
   const [currentCard, setCurrentCard] = useState(null);
-  const [view, setView] = useState("workspace"); // "workspace" or "list"
+  const [view, setView] = useState("list"); // "workspace" or "list"
 
   const newCardTemplate = {
     id: null,
@@ -36,84 +36,6 @@ function App() {
     imageRect: null, // Initial image rectangle
     imageAspectRatio: 1, // Default aspect ratio
   };
-
-  // Test data
-  const testCards = [
-    {
-      id: 1,
-
-      // Text fields
-      title: "Test Card",
-      description: [
-        {
-          type: "paragraph",
-          content: "This is a new Card!",
-        },
-      ],
-      textTopLeft: "Text Top-Left",
-      // Text options
-      textTopLeftOptions: {
-        color: "#0000ff",
-        fontSize: "16",
-        bold: true,
-        italic: false,
-        underline: false,
-      },
-      textTopRight: "Text Top-Right",
-      // Text options
-      textTopRightOptions: {
-        color: "#ff0000",
-        fontSize: "15",
-        bold: false,
-        italic: true,
-        underline: false,
-      },
-      backgroundColor: "#f0f0f0", // Default background color
-      image: null, // Initially no image
-      imageName: "", // Initially no image name
-      imageRect: null, // Initial image rectangle
-      imageAspectRatio: 1, // Default aspect ratio
-    },
-    {
-      id: 2,
-      title: "Another Card",
-      description: [
-        {
-          type: "paragraph",
-          content: "This is another Card!",
-        },
-      ],
-      textTopLeft: "Text 2 Top-Left",
-      textTopRight: "Text 2 Top-Right",
-      image: null, // Initially no image
-      imageName: "", // Initially no image name
-      imageRect: null, // Initial image rectangle
-      imageAspectRatio: 1, // Default aspect ratio
-    },
-    {
-      id: 3,
-      title: "Third Card",
-      description: [
-        {
-          type: "paragraph",
-          content: "This is the third Card!",
-        },
-      ],
-      textTopLeft: "Text 3 Top-Left",
-      textTopRight: "Text 3 Top-Right",
-      backgroundColor:"#cccccc",
-      image: null, // Initially no image
-      imageName: "", // Initially no image name
-      imageRect: null, // Initial image rectangle
-      imageAspectRatio: 1, // Default aspect ratio
-    },
-  ];
-
-  // Adding a test card for demonstration
-  if (cards.length === 0) {
-    setCards(testCards);
-    setCurrentCard(testCards[0]);
-  }
 
   function addCard() {
     const newCard = {
@@ -173,6 +95,10 @@ function App() {
   }
 
   function handleViewToggle() {
+    if (cards.length === 0) {
+      alert("Please create a card first.");
+      return;
+    }
     setView(view === "workspace" ? "list" : "workspace");
   }
 
