@@ -126,9 +126,10 @@ function Card({ card, updateCard }) {
     >
       <div className="card__header">
         <input
-          className="card__text-row"
-          value={card?.textTopLeft}
+          className="card__text-row card__text-left"
+          value={card?.textTopLeft || ""}
           onChange={handleUpdateTextTopLeft}
+          placeholder="Top left text"
           style={{
             color: card?.textTopLeftOptions?.color || "#000000",
             fontSize: card?.textTopLeftOptions?.fontSize + "px" || "12px",
@@ -138,15 +139,17 @@ function Card({ card, updateCard }) {
           }}
         />
         <input
-          className="card__text-row"
-          value={card?.textTopRight}
+          className="card__text-row card__text-right"
+          value={card?.textTopRight || ""}
           onChange={handleUpdateTextTopRight}
+          placeholder="Top right text"
           style={{
             color: card?.textTopRightOptions?.color || "#000000",
             fontSize: card?.textTopRightOptions?.fontSize + "px" || "12px",
             fontWeight: card?.textTopRightOptions?.bold ? "bold" : "normal",
             fontStyle: card?.textTopRightOptions?.italic ? "italic" : "normal",
             textDecoration: card?.textTopRightOptions?.underline ? "underline" : "none",
+            textAlign: "right",
           }}
         />
       </div>
@@ -174,8 +177,9 @@ function Card({ card, updateCard }) {
         type="text"
         name="title"
         id="title"
-        value={card?.title}
+        value={card?.title || ""}
         className="card__title"
+        placeholder="Card title"
         onChange={handleUpdateTitle}
       />
       <RichtextArea card={card} onUpdateDescription={handleUpdateDescription} />

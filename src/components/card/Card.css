@@ -25,9 +25,20 @@
     & input {
       width: 100%;
       border: none;
+      padding: 0.125rem;
+      background: transparent;
     }
 
-    & input:last-child {
+    & input::placeholder {
+      color: #999;
+      opacity: 0.7;
+    }
+
+    & .card__text-left {
+      text-align: left;
+    }
+
+    & .card__text-right {
       text-align: right;
     }
   }
@@ -36,6 +47,14 @@
     font-weight: bold;
     border: none;
     padding: 0.125rem;
+    background: transparent;
+    min-height: 1.5em;
+  }
+
+  & .card__title::placeholder {
+    color: #999;
+    opacity: 0.7;
+    font-weight: normal;
   }
 
   & .card__description {
