@@ -8,15 +8,21 @@ h6 {
 }
 
 .sidebar {
+  --sidebar-margin: 4rem;
+
   width: 250px;
   background-color: #f4f4f4;
   padding: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
-  position: absolute;
+  position: fixed;
+  margin: var(--sidebar-margin);
   top: 0;
-  right: 1rem;
+  right: 0;
 
+  height: calc(100vh - var(--sidebar-margin) * 2);
+  max-height: calc(100vh - var(--sidebar-margin) * 2);
+  overflow-y: auto;
   overflow-x: hidden;
 
   & * {
