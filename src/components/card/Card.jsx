@@ -119,10 +119,11 @@ function Card({ card, updateCard }) {
   }
 
   return (
-    <div className="card"
-    style={{
-      backgroundColor: card?.backgroundColor || "#ffffff",
-    }}
+    <div
+      className="card"
+      style={{
+        backgroundColor: card?.backgroundColor || "#ffffff",
+      }}
     >
       <div className="card__header">
         <input
@@ -135,7 +136,9 @@ function Card({ card, updateCard }) {
             fontSize: card?.textTopLeftOptions?.fontSize + "px" || "12px",
             fontWeight: card?.textTopLeftOptions?.bold ? "bold" : "normal",
             fontStyle: card?.textTopLeftOptions?.italic ? "italic" : "normal",
-            textDecoration: card?.textTopLeftOptions?.underline ? "underline" : "none",
+            textDecoration: card?.textTopLeftOptions?.underline
+              ? "underline"
+              : "none",
           }}
         />
         <input
@@ -148,7 +151,9 @@ function Card({ card, updateCard }) {
             fontSize: card?.textTopRightOptions?.fontSize + "px" || "12px",
             fontWeight: card?.textTopRightOptions?.bold ? "bold" : "normal",
             fontStyle: card?.textTopRightOptions?.italic ? "italic" : "normal",
-            textDecoration: card?.textTopRightOptions?.underline ? "underline" : "none",
+            textDecoration: card?.textTopRightOptions?.underline
+              ? "underline"
+              : "none",
             textAlign: "right",
           }}
         />
